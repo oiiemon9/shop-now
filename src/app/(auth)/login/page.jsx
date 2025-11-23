@@ -1,8 +1,11 @@
 'use client';
 import React from 'react';
 import { signIn } from 'next-auth/react';
+import { useSearchParams } from 'next/navigation';
 
 export default function loginPage() {
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get('callbackUrl') || '/';
   return (
     <div className="w-full mt-10">
       <div className=" flex items-center justify-center ">
@@ -61,7 +64,7 @@ export default function loginPage() {
 
           {/* Google Login */}
           <button
-            onClick={() => signIn('google', { callbackUrl: '/' })}
+            onClick={() => signIn('google', { callbackUrl })}
             className="btn w-full bg-gray-100 border border-gray-300 hover:bg-gray-200 text-black flex items-center gap-2"
           >
             <img

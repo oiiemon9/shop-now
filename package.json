@@ -10,12 +10,14 @@
   },
   "dependencies": {
     "@smastrom/react-rating": "^1.5.0",
+    "axios": "^1.13.2",
     "daisyui": "^5.5.5",
     "next": "16.0.3",
     "next-auth": "^4.24.13",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "react-hook-form": "^7.66.1"
+    "react-hook-form": "^7.66.1",
+    "sweetalert2": "^11.26.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

@@ -1,16 +1,38 @@
 'use client';
+import useAxios from '@/Hook/useAxios';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
 
 export default function page() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
+  const axiosInstance = useAxios();
 
-  const handelUpload = (data) => {
+  const handelUpload = async (data) => {
     const price = Number(data.price);
+    data.price = price;
+    data.rating = 0;
+    data.review = 5;
+
+    try {
+      const res = await axiosInstance.post('/add-product', data);
+      if (res.data.insertedId) {
+        reset();
+        Swal.fire({
+          icon: 'success',
+          title: 'Your product upload successful',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="max-w-4xl px-4  mb-24 mt-10 sm:px-6 lg:px-8  mx-auto">
