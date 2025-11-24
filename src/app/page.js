@@ -1,4 +1,5 @@
 import HerroSection from '@/components/HeroSection/HerroSection';
+import JoinNewsletter from '@/components/JoinNewsletter/JoinNewsletter';
 import LatestProducts from '@/components/LatestProducts/LatestProducts';
 import Marquee from '@/components/Marquee/Marquee';
 import OurSpecifications from '@/components/OurSpecifications/OurSpecifications';
@@ -14,6 +15,7 @@ export default function Home() {
         <LatestProducts></LatestProducts>
         <TopSelling></TopSelling>
         <OurSpecifications></OurSpecifications>
+        <JoinNewsletter></JoinNewsletter>
       </div>
     </main>
   );
