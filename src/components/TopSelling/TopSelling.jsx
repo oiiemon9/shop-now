@@ -17,8 +17,8 @@ export default function TopSelling() {
       <div>
         <h3 className="text-2xl font-bold">Top Selling</h3>
         <div className="flex gap-5">
-          <p className="text-gray-500 text-sm">Showing 4 of 12 products</p>
-          <button className="text-green-600 cursor-pointer hover:underline">
+          <p className="text-gray-500 text-sm">Showing 8 of 56 products</p>
+          <button className="text-purple-600 cursor-pointer hover:underline">
             View more
           </button>
         </div>
