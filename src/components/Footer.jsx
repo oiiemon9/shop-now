@@ -46,22 +46,22 @@ const Footer = () => {
           <h2 className="font-semibold text-gray-900 mb-4">PRODUCTS</h2>
           <ul className="space-y-2 text-sm text-gray-600">
             <li>
-              <a href="#" className="hover:text-green-600 transition">
+              <a href="#" className="hover:text-purple-600 transition">
                 Earphones
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-green-600 transition">
+              <a href="#" className="hover:text-purple-600 transition">
                 Headphones
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-green-600 transition">
+              <a href="#" className="hover:text-purple-600 transition">
                 Smartphones
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-green-600 transition">
+              <a href="#" className="hover:text-purple-600 transition">
                 Laptops
               </a>
             </li>
@@ -72,22 +72,22 @@ const Footer = () => {
           <h2 className="font-semibold text-gray-900 mb-4">WEBSITE?</h2>
           <ul className="space-y-2 text-sm text-gray-600">
             <li>
-              <a href="#" className="hover:text-green-600 transition">
+              <a href="#" className="hover:text-purple-600 transition">
                 Home
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-green-600 transition">
+              <a href="#" className="hover:text-purple-600 transition">
                 Privacy Policy
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-green-600 transition">
+              <a href="#" className="hover:text-purple-600 transition">
                 Become Plus Member
               </a>
             </li>
             <li>
-              <a href="#" className="hover:text-green-600 transition">
+              <a href="#" className="hover:text-purple-600 transition">
                 Create Your Store
               </a>
             </li>
