@@ -56,45 +56,71 @@ export default function Navbar() {
         </div>
         <div className="navbar-end">
           {session?.user ? (
-            <div className="dropdown dropdown-end">
-              <div
-                tabIndex={0}
+            <div className="space-x-2">
+              <Link
+                href="/my-card"
                 role="button"
-                className="btn btn-ghost btn-circle avatar"
+                className="btn btn-ghost btn-circle"
               >
-                <div className="w-10 rounded-full">
-                  <img
-                    alt="Tailwind CSS Navbar component"
-                    src={session.user.image}
-                  />
-                </div>
-              </div>
-              <ul
-                tabIndex="-1"
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-              >
-                <div className="flex flex-col items-center justify-center gap-1 mb-2 border-b border-gray-300 text-gray-600">
-                  <div className="h-18 w-18">
-                    <img src={session.user.image} alt="" />
-                  </div>
-                  <h2>{session.user.name}</h2>
-                  <h2>{session.user?.email}</h2>
-                </div>
-                <li>
-                  <Link href="/manage-products">Manage Products</Link>
-                </li>
-                <li>
-                  <Link href="/add-product">Add Product</Link>
-                </li>
-                <li>
-                  <button
-                    className="bg-rose-600 text-white"
-                    onClick={() => signOut()}
+                <div className="indicator">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
                   >
-                    Logout
-                  </button>
-                </li>
-              </ul>
+                    {' '}
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                    />{' '}
+                  </svg>
+                  <span className="badge badge-sm indicator-item">8</span>
+                </div>
+              </Link>
+              <div className="dropdown dropdown-end">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle avatar"
+                >
+                  <div className="w-10 rounded-full">
+                    <img
+                      alt="Tailwind CSS Navbar component"
+                      src={session.user.image}
+                    />
+                  </div>
+                </div>
+                <ul
+                  tabIndex="-1"
+                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+                >
+                  <div className="flex flex-col items-center justify-center gap-1 mb-2 border-b border-gray-300 text-gray-600">
+                    <div className="h-18 w-18">
+                      <img src={session.user.image} alt="" />
+                    </div>
+                    <h2>{session.user.name}</h2>
+                    <h2>{session.user?.email}</h2>
+                  </div>
+                  <li>
+                    <Link href="/manage-products">Manage Products</Link>
+                  </li>
+                  <li>
+                    <Link href="/add-product">Add Product</Link>
+                  </li>
+                  <li>
+                    <button
+                      className="bg-rose-600 text-white"
+                      onClick={() => signOut()}
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </div>
           ) : (
             <Link href="/login" className="btn">

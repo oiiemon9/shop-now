@@ -6,14 +6,19 @@ import { Clipboard, CreditCard, Earth, Handshake } from 'lucide-react';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import Tab from './Tab';
+import { useSession } from 'next-auth/react';
+import { toast } from 'react-toastify';
 
 export default function page({ params }) {
   const { id } = React.use(params);
+  const { data: session } = useSession();
   const axiosInstance = useAxios();
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  console.log(product);
+
+  console.log(session?.user.email);
+
   useEffect(() => {
     async function fetchProduct() {
       setLoading(true);
@@ -29,6 +34,29 @@ export default function page({ params }) {
     }
     fetchProduct();
   }, [id, axiosInstance]);
+
+  const handelAddToCart = async (id) => {
+    const productInfo = {
+      productId: id,
+      userEmail: session.user.email,
+      price: product.price,
+      quantity: 1,
+      totalPrice: product.price,
+    };
+    try {
+      const res = await axiosInstance.post('/card', productInfo);
+      console.log(res);
+      if (res.data.insertedId) {
+        toast.success('Product successfully added to cart');
+      }
+      if (res.data.message) {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="max-w-[1340px] mx-auto px-2 mt-10">
       {product && (
@@ -84,7 +112,10 @@ export default function page({ params }) {
                   <Clipboard size={20} />
                   {product.sortDescription}
                 </p>
-                <button className="btn bg-purple-600 text-white rounded-full">
+                <button
+                  onClick={() => handelAddToCart(product._id)}
+                  className="btn bg-purple-600 text-white rounded-full"
+                >
                   Add To Cart
                 </button>
                 <div className="w-full border-b border-gray-300"></div>

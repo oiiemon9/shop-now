@@ -25,5 +25,6 @@ export const config = {
     '/add-product',
     '/products/:path*',
     '/manage-products/:path*',
+    '/my-card/:path*',
   ],
 };
