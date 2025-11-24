@@ -2,8 +2,10 @@
 import useAxios from '@/Hook/useAxios';
 import { Rating } from '@smastrom/react-rating';
 import '@smastrom/react-rating/style.css';
+import { Clipboard, CreditCard, Earth, Handshake } from 'lucide-react';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
+import Tab from './Tab';
 
 export default function page({ params }) {
   const { id } = React.use(params);
@@ -43,8 +45,8 @@ export default function page({ params }) {
             </ul>
           </div>
           <div className="mt-6">
-            <div className="grid grid-cols-2  items-center gap-18">
-              <div className="flex flex-col-reverse md:flex-row gap-5">
+            <div className="grid grid-cols-1 lg:grid-cols-2   items-center gap-18">
+              <div className="flex flex-col-reverse sm:flex-row gap-5">
                 <button className="flex max-w-24 w-full h-24 border border-gray-300 p-2 bg-gray-100 cursor-pointer">
                   <img
                     className="h-full w-full object-contain"
@@ -72,10 +74,31 @@ export default function page({ params }) {
                     {product.review} Reviews
                   </span>
                 </div>
-                <h2 className="text-2xl">${product.price}</h2>
+                <h2 className="text-2xl font-bold">${product.price}</h2>
+                <p className="text-gray-600 flex gap-1 text-sm">
+                  <Clipboard size={20} />
+                  {product.sortDescription}
+                </p>
+                <button className="btn bg-purple-600 text-white rounded-full">
+                  Add To Cart
+                </button>
+                <div className="w-full border-b border-gray-300"></div>
+                <p className="flex gap-2 text-gray-600">
+                  <Earth />
+                  Free shipping worldwide
+                </p>
+                <p className="flex gap-2 text-gray-600">
+                  <CreditCard />
+                  100% Secured Payment
+                </p>
+                <p className="flex gap-2 text-gray-600">
+                  <Handshake />
+                  Trusted by top brands
+                </p>
               </div>
             </div>
           </div>
+          <Tab product={product}></Tab>
         </div>
       )}
     </div>
