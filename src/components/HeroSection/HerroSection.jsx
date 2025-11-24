@@ -1,11 +1,12 @@
+import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 
 export default function HerroSection() {
   return (
-    <div className="grid grid-cols-3 grid-rows-2 gap-10 mt-10">
-      <div className="col-span-2 row-span-2 h-[430px] bg-[url('https://i.ibb.co.com/HDKgwQVP/download-47.png')] bg-no-repeat bg-cover bg-bottom rounded-2xl p-10 flex items-end">
-        <div className="space-y-5">
+    <div className="grid grid-cols-2 lg:grid-cols-3 grid-rows-2 gap-10 mt-10">
+      <div className="col-span-2 row-span-2 h-[260px] sm:h-[360px] md:h-[464px] bg-[url('https://i.ibb.co.com/HDKgwQVP/download-47.png')] bg-no-repeat bg-cover bg-bottom rounded-2xl p-4 sm:p-10 flex items-end">
+        <div className="space-y-2 sm:space-y-5">
           <div className="bg-purple-200 rounded-full px-1 py-1 flex items-center w-fit text-sm gap-2">
             <span className="bg-purple-600 text-white px-2 rounded-full">
               NEWS
@@ -14,7 +15,7 @@ export default function HerroSection() {
               Free Shipping on Orders Above $20!{' '}
             </p>
           </div>
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 via-purple-800-500 to-indigo-400/80 inline-block text-transparent bg-clip-text text-shadow-lg">
+          <h1 className="text-xl sm:text-4xl font-bold bg-gradient-to-r from-purple-600 via-purple-800-500 to-indigo-400/80 text-transparent bg-clip-text text-shadow-lg">
             Why Apple is the best <br /> place to buy Apple Watch.
           </h1>
           <div>
@@ -29,9 +30,46 @@ export default function HerroSection() {
           </Link>
         </div>
       </div>
-      <div className="col-span-1 row-span-1 bg-amber-200"></div>
-
-      <div className="col-span-1 row-span-1 bg-blue-100"></div>
+      <div className="col-span-2 md:col-span-1 row-span-1 bg-purple-200 p-4 rounded-2xl flex items-center justify-between">
+        <div className="space-y-4">
+          <h2 className="text-4xl font-semibold bg-gradient-to-r from-purple-600 via-purple-800-500 to-indigo-400/80 text-transparent bg-clip-text">
+            Best <br /> Products
+          </h2>
+          <Link
+            href="/products/6923d88f530fa06e5dc96769"
+            className="cursor-pointer flex gap-2 text-sm items-center hover:text-purple-600 hover:underline transition-colors duration-200 "
+          >
+            View More <ChevronRight />
+          </Link>
+        </div>
+        <div className="h-44 w-44">
+          <img
+            src="https://i.ibb.co.com/HpgF4YtL/download-45-removebg-preview.png"
+            className="h-full w-full object-contain"
+            alt=""
+          />
+        </div>
+      </div>
+      <div className="col-span-2 md:col-span-1 row-span-1 bg-blue-200 p-4 rounded-2xl flex items-center justify-between">
+        <div className="space-y-4">
+          <h2 className="text-4xl font-semibold bg-gradient-to-r from-blue-600 via-blue-800-500 to-indigo-400/80 text-transparent bg-clip-text">
+            Free <br /> Delivery
+          </h2>
+          <Link
+            href="/products/6923d7f1530fa06e5dc96768"
+            className="cursor-pointer flex gap-2 text-sm items-center hover:text-blue-600 hover:underline transition-colors duration-200 "
+          >
+            View More <ChevronRight />
+          </Link>
+        </div>
+        <div className="h-44 w-44">
+          <img
+            src="https://i.ibb.co.com/q388rsHh/download-44-removebg-preview.png"
+            className="h-full w-full object-contain"
+            alt=""
+          />
+        </div>
+      </div>
     </div>
   );
 }
