@@ -70,17 +70,26 @@ export default function Navbar() {
               tabIndex="-1"
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
+              <div className="flex flex-col items-center justify-center gap-1 mb-2 border-b border-gray-300 text-gray-600">
+                <div className="h-18 w-18">
+                  <img src={session.user.image} alt="" />
+                </div>
+                <h2>{session.user.name}</h2>
+                <h2>{session.user?.email}</h2>
+              </div>
               <li>
-                <a className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
-                </a>
+                <Link href="/manage-products">Manage Products</Link>
               </li>
               <li>
                 <Link href="/add-product">Add Product</Link>
               </li>
               <li>
-                <button onClick={() => signOut()}>Logout</button>
+                <button
+                  className="bg-rose-600 text-white"
+                  onClick={() => signOut()}
+                >
+                  Logout
+                </button>
               </li>
             </ul>
           </div>

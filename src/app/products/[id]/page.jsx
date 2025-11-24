@@ -1,6 +1,6 @@
 'use client';
 import useAxios from '@/Hook/useAxios';
-import { Rating } from '@smastrom/react-rating';
+import { Rating, ThinRoundedStar } from '@smastrom/react-rating';
 import '@smastrom/react-rating/style.css';
 import { Clipboard, CreditCard, Earth, Handshake } from 'lucide-react';
 import Link from 'next/link';
@@ -68,6 +68,11 @@ export default function page({ params }) {
                   <Rating
                     style={{ maxWidth: 80 }}
                     value={product.rating}
+                    itemStyles={{
+                      itemShapes: ThinRoundedStar,
+                      activeFillColor: '#9810fa',
+                      inactiveFillColor: '#e9d4ff',
+                    }}
                     readOnly
                   />
                   <span className="text-sm text-gray-600">

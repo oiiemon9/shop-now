@@ -1,9 +1,9 @@
+import React, { use } from 'react';
 import { Rating, ThinRoundedStar } from '@smastrom/react-rating';
 import '@smastrom/react-rating/style.css';
 import Link from 'next/link';
-import React, { use } from 'react';
 
-export default function LatestProductsMap({ dataPromise }) {
+export default function AllProductsGrid({ dataPromise }) {
   const { data } = use(dataPromise);
   return (
     <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">

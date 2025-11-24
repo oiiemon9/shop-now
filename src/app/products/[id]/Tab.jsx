@@ -1,4 +1,4 @@
-import { Rating } from '@smastrom/react-rating';
+import { Rating, ThinRoundedStar } from '@smastrom/react-rating';
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
@@ -39,11 +39,16 @@ export default function ProductTab({ product }) {
             <h2 className="text-2xl font-bold text-gray-800 mb-6">
               Customer Review
             </h2>
-            <div className="flex items-center gap-2 text-3xl font-bold text-amber-500 mb-2">
+            <div className="flex items-center gap-2 text-3xl font-bold text-purple-600 mb-2">
               {product.rating}{' '}
               <Rating
                 style={{ maxWidth: 180 }}
                 value={product.rating}
+                itemStyles={{
+                  itemShapes: ThinRoundedStar,
+                  activeFillColor: '#9810fa',
+                  inactiveFillColor: '#e9d4ff',
+                }}
                 readOnly
               />
             </div>
