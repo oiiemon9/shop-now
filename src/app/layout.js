@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import Providers from './providers';
 import { ToastContainer } from 'react-toastify';
 import CartProvider from '@/Context/CartProvider';
+import SearchProvider from '@/Context/SearchProvider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -29,10 +30,12 @@ export default function RootLayout({ children }) {
       >
         <Providers>
           <CartProvider>
-            <Navbar></Navbar>
-            {children}
-            <Footer></Footer>
-            <ToastContainer></ToastContainer>
+            <SearchProvider>
+              <Navbar></Navbar>
+              {children}
+              <Footer></Footer>
+              <ToastContainer></ToastContainer>
+            </SearchProvider>
           </CartProvider>
         </Providers>
       </body>

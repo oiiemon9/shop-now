@@ -4,10 +4,18 @@ import Link from 'next/link';
 import React, { use } from 'react';
 import { signOut } from 'next-auth/react';
 import { CartContext } from '@/Context/CartProvider';
+import { Search } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { redirect } from 'next/navigation';
+import useAxios from '@/Hook/useAxios';
+import { SearchContext } from '@/Context/SearchProvider';
 
 export default function Navbar() {
   const { data: session } = useSession();
   const { cartCount } = use(CartContext);
+  const { searchText, setSearchText } = use(SearchContext);
+  const axiosInstance = useAxios();
+  const { register, handleSubmit } = useForm();
 
   const navLinks = (
     <>
@@ -20,6 +28,12 @@ export default function Navbar() {
     </>
   );
 
+  const handelSearch = async (data) => {
+    const { search } = data;
+    const searchValue = search.trim();
+    setSearchText(searchValue);
+    redirect('/products');
+  };
   return (
     <nav className=" bg-base-100 shadow-sm sticky top-0 z-50">
       <div className="navbar max-w-[1340px] mx-auto px-2">
@@ -58,7 +72,24 @@ export default function Navbar() {
         </div>
         <div className="navbar-end">
           {session?.user ? (
-            <div className="space-x-2">
+            <div className="space-x-2 flex">
+              <div className="hidden md:flex justify-center w-full ">
+                <form
+                  onSubmit={handleSubmit(handelSearch)}
+                  className="flex items-center rounded-full border border-gray-300 bg-purple-100/20 overflow-hidden max-w-2xl w-full p-1 px-2"
+                >
+                  <input
+                    type="search"
+                    placeholder="Search..."
+                    {...register('search')}
+                    defaultValue={searchText}
+                    className=" w-full  text-gray-700 outline-none placeholder:text-sm"
+                  />
+                  <button type="submit" className="btn btn-sm rounded-full">
+                    <Search size={15} />
+                  </button>
+                </form>
+              </div>
               <Link
                 href="/my-card"
                 role="button"
