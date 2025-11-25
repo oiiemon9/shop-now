@@ -4,10 +4,11 @@ import { Rating, ThinRoundedStar } from '@smastrom/react-rating';
 import '@smastrom/react-rating/style.css';
 import { Clipboard, CreditCard, Earth, Handshake } from 'lucide-react';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import Tab from './Tab';
 import { useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
+import { CartContext } from '@/Context/CartProvider';
 
 export default function page({ params }) {
   const { id } = React.use(params);
@@ -16,6 +17,7 @@ export default function page({ params }) {
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const { cartCount, setCartCount } = use(CartContext);
 
   console.log(session?.user.email);
 
@@ -48,6 +50,8 @@ export default function page({ params }) {
       console.log(res);
       if (res.data.insertedId) {
         toast.success('Product successfully added to cart');
+        const newCount = cartCount + 1;
+        setCartCount(newCount);
       }
       if (res.data.message) {
         toast.error(res.data.message);

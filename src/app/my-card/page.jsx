@@ -2,15 +2,17 @@
 import useAxios from '@/Hook/useAxios';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import TableRow from './TableRow';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
+import { CartContext } from '@/Context/CartProvider';
 
 export default function MyCard() {
   const [myCard, setMyCard] = useState([]);
   const { data: session } = useSession();
   const axiosInstance = useAxios();
+  const { cartCount, setCartCount } = use(CartContext);
 
   useEffect(() => {
     const myCardData = async () => {
@@ -49,6 +51,8 @@ export default function MyCard() {
             });
             const newCart = myCard.filter((cart) => cart._id !== id);
             setMyCard(newCart);
+            const newCount = cartCount - 1;
+            setCartCount(newCount);
           }
         } catch (error) {
           toast.error(error.message);
