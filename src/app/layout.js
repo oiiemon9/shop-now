@@ -6,6 +6,7 @@ import Providers from './providers';
 import { ToastContainer } from 'react-toastify';
 import CartProvider from '@/Context/CartProvider';
 import SearchProvider from '@/Context/SearchProvider';
+import 'leaflet/dist/leaflet.css';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',

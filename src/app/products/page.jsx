@@ -27,7 +27,14 @@ export default function Shop() {
   return (
     <div className="max-w-[1340px] mx-auto px-2 mt-10">
       <div className="flex flex-col sm:flex-row gap-5 justify-between items-center">
-        <h3 className="text-2xl font-bold">All Products</h3>
+        <div>
+          <h3 className="text-2xl font-bold">All Products</h3>
+          {searchText && (
+            <p>
+              <span className="font-bold">Search:</span> {searchText}{' '}
+            </p>
+          )}
+        </div>
         <form
           onSubmit={handleSubmit(handelSearch)}
           className=" flex md:hidden  items-center rounded-full border border-gray-300 bg-purple-100/20 overflow-hidden max-w-xs w-full p-1 px-2"
