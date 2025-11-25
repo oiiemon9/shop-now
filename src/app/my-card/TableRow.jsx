@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { MdOutlineDeleteForever } from 'react-icons/md';
 
-export default function TableRow({ product, myCard, setMyCard }) {
+export default function TableRow({ product, myCard, setMyCard, handelDelete }) {
   const [num, setNum] = useState(product.quantity);
   let oldProduct = product;
   useEffect(() => {
@@ -14,6 +15,7 @@ export default function TableRow({ product, myCard, setMyCard }) {
     };
     priceUpdate();
   }, [num]);
+
   return (
     <tr>
       <td>
@@ -21,14 +23,15 @@ export default function TableRow({ product, myCard, setMyCard }) {
           <div className="avatar">
             <div className="mask mask-squircle h-12 w-12">
               <img
-                src="https://img.daisyui.com/images/profile/demo/2@94.webp"
+                src={product.productDetails.image}
                 alt="Avatar Tailwind CSS Component"
               />
             </div>
           </div>
           <div>
-            <div className="font-bold">Hart Hagerty</div>
-            <div className="text-sm opacity-50">United States</div>
+            <div className="font-bold">{product.productDetails.title}</div>
+            <div className="text-xs opacity-50">Electronics</div>
+            <div className="text-sm opacity-50">${product.price}</div>
           </div>
         </div>
       </td>
@@ -58,7 +61,12 @@ export default function TableRow({ product, myCard, setMyCard }) {
       </td>
       <td>${product.totalPrice}</td>
       <td>
-        <button className="btn">Remove</button>
+        <button
+          onClick={() => handelDelete(product._id)}
+          className="btn px-0 bg-transparent"
+        >
+          <MdOutlineDeleteForever className="text-rose-600" size={30} />
+        </button>
       </td>
     </tr>
   );

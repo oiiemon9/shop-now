@@ -4,6 +4,8 @@ import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import TableRow from './TableRow';
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 
 export default function MyCard() {
   const [myCard, setMyCard] = useState([]);
@@ -26,10 +28,38 @@ export default function MyCard() {
     myCardData();
   }, [session]);
 
-  console.log(myCard);
+  const handelDelete = async (id) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to delete this product from your cart?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axiosInstance.delete(`/my-cart?id=${id}`);
+          if (res.data.deletedCount) {
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'Your cart product has been deleted.',
+              icon: 'success',
+            });
+            const newCart = myCard.filter((cart) => cart._id !== id);
+            setMyCard(newCart);
+          }
+        } catch (error) {
+          toast.error(error.message);
+        }
+      }
+    });
+  };
+
   return (
     <div className="max-w-[1340px] mx-auto px-2 mt-10">
-      <h3 className="text-2xl font-bold">My Card</h3>
+      <h3 className="text-2xl font-bold">My Cart</h3>
       <div className="flex gap-5">
         <p className="text-gray-500 text-sm">items in your cart</p>
         <Link
@@ -39,35 +69,105 @@ export default function MyCard() {
           Add more
         </Link>
       </div>
-      <div className="grid grid-cols-4 gap-10 mt-10">
-        <div className="overflow-x-auto col-span-3">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Total Price</th>
-                <th>Remove</th>
-              </tr>
-            </thead>
-            <tbody>
-              {myCard.map((product) => (
-                <TableRow
-                  key={product._id}
-                  product={product}
-                  setMyCard={setMyCard}
-                  myCard={myCard}
-                ></TableRow>
-              ))}
-            </tbody>
-          </table>
+      {myCard.length === 0 ? (
+        <h2 className="text-center mt-10 text-2xl font-medium text-gray-600">
+          Cart data not found
+        </h2>
+      ) : (
+        <div className="grid grid-cols-3 lg:grid-cols-4 gap-10 mt-10">
+          <div className="overflow-x-auto col-span-3">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Quantity</th>
+                  <th>Total Price</th>
+                  <th>Remove</th>
+                </tr>
+              </thead>
+              <tbody className="text-nowrap">
+                {myCard.map((product) => (
+                  <TableRow
+                    key={product._id}
+                    product={product}
+                    setMyCard={setMyCard}
+                    myCard={myCard}
+                    handelDelete={handelDelete}
+                  ></TableRow>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="col-span-3 lg:col-span-1 border p-4 rounded-2xl border-gray-300 w-full max-w-sm bg-white shadow-sm">
+            <h2 className="text-xl font-semibold mb-4">Payment Summary</h2>
+
+            {/* Payment Method */}
+            <p className="text-gray-600 text-sm mb-2">Payment Method</p>
+
+            <div className="flex flex-col gap-2 mb-4">
+              <label className="flex items-center gap-2">
+                <input type="radio" name="payment" defaultChecked />
+                <span>Stripe Payment</span>
+              </label>
+              <label className="flex items-center gap-2">
+                <input type="radio" name="payment" />
+                <span>Sslcommerz</span>
+              </label>
+            </div>
+
+            <hr className="my-4 text-gray-300" />
+
+            {/* Address */}
+            <p className="text-gray-600 text-sm mb-1">Address</p>
+            <div className="mt-2 space-y-3">
+              <input
+                type="text"
+                className="py-1.5 sm:py-2 px-3 pe-11 block w-full shadow-2xs sm:text-sm rounded-lg outline-1 outline-gray-300 dark:outline-gray-700 focus:outline-2 focus:outline-blue-600"
+                placeholder="Product Title"
+                defaultValue="794 Francisco, 94102"
+              />
+            </div>
+
+            <hr className="my-4 text-gray-300" />
+
+            <div className="flex justify-between mb-2">
+              <span className="text-gray-700">Subtotal:</span>
+              <span className="font-medium">
+                ${myCard.reduce((sum, cart) => sum + cart.totalPrice, 0)}
+              </span>
+            </div>
+
+            <div className="flex justify-between mb-4">
+              <span className="text-gray-700">Shipping:</span>
+              <span className="font-medium">$5</span>
+            </div>
+
+            <div className="flex gap-2 mb-6">
+              <input
+                type="text"
+                placeholder="Coupon Code"
+                className="border border-gray-300 rounded-lg px-3 py-2 w-full focus:outline-none focus:ring-1 focus:ring-blue-500"
+              />
+              <button className="bg-gray-700 text-white px-4 rounded-lg hover:bg-gray-800">
+                Apply
+              </button>
+            </div>
+
+            <hr className="my-4 text-gray-300 border-dashed" />
+
+            <div className="flex justify-between text-lg font-semibold mb-6">
+              <span>Total:</span>
+              <span>
+                ${myCard.reduce((sum, cart) => sum + cart.totalPrice, 0) + 5}
+              </span>
+            </div>
+
+            <button className="w-full bg-purple-800 text-white py-3 rounded-lg font-medium hover:bg-purple-900">
+              Place Order
+            </button>
+          </div>
         </div>
-        <div className="border">
-          {myCard.map((cart, i) => (
-            <p key={i}>{cart.totalPrice}</p>
-          ))}
-        </div>
-      </div>
+      )}
     </div>
   );
 }
