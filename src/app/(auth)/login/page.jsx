@@ -2,6 +2,7 @@
 import React from 'react';
 import { signIn } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 
 export default function loginPage() {
   const searchParams = useSearchParams();
@@ -44,16 +45,19 @@ export default function loginPage() {
               </a>
             </div>
 
-            <button className="btn w-full mt-4 bg-lime-300 border-none hover:bg-lime-400 text-black">
+            <button className="btn w-full mt-4 bg-purple-600 border-none hover:bg-purple-700 text-white">
               Login
             </button>
           </form>
 
           <p className="mt-4 text-center text-sm text-gray-600">
             Don’t have any account?{' '}
-            <button className="text-blue-600 font-medium hover:underline cursor-pointer">
+            <Link
+              href="/register"
+              className="text-blue-600 font-medium hover:underline cursor-pointer"
+            >
               Register
-            </button>
+            </Link>
           </p>
 
           <div className="flex items-center my-4">

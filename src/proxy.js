@@ -26,5 +26,7 @@ export const config = {
     '/products/:path*',
     '/manage-products/:path*',
     '/my-card/:path*',
+    '/about-us/:path*',
+    '/contact-us/:path*',
   ],
 };

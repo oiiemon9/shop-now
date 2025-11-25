@@ -5,7 +5,7 @@ import 'leaflet/dist/leaflet.css';
 
 export default function Map() {
   return (
-    <div className="aspect-video border">
+    <div className="aspect-video">
       <MapContainer
         center={[23.999841, 90.419945]}
         zoom={13}
