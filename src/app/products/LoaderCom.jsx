@@ -13,7 +13,7 @@ export default function LoaderCom() {
             <div className="space-y-2 flex-1">
               <div className="h-5 bg-gray-300 rounded w-3/4"></div>
               <div className="h-4 bg-gray-300 rounded w-1/2"></div>{' '}
-              {/* For Rating placeholder */}
+              {/* For Rating placeholder.. */}
             </div>
             <div className="h-5 bg-gray-300 rounded w-12"></div>{' '}
             {/* Price placeholder */}
