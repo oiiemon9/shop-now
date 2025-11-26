@@ -7,15 +7,19 @@ import TableRow from './TableRow';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import { CartContext } from '@/Context/CartProvider';
+import Lottie from 'lottie-react';
+// import loadingAnimation from '@/public/LoadingAnimationBlue.json';
 
 export default function MyCard() {
   const [myCard, setMyCard] = useState([]);
   const { data: session } = useSession();
   const axiosInstance = useAxios();
   const { cartCount, setCartCount } = use(CartContext);
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
     const myCardData = async () => {
+      setLoader(true);
       try {
         const res = await axiosInstance(
           `/my-cart?email=${session?.user?.email}`
@@ -25,10 +29,12 @@ export default function MyCard() {
         }
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoader(false);
       }
     };
     myCardData();
-  }, [session]);
+  }, [session?.user]);
 
   const handelDelete = async (id) => {
     Swal.fire({
@@ -60,6 +66,18 @@ export default function MyCard() {
       }
     });
   };
+
+  if (loader) {
+    return (
+      <div className="flex justify-center ">
+        <Lottie
+          animationData={require('../../../public/LoadingAnimationBlue.json')}
+          loop={true}
+          style={{ width: '150px', height: '150px', color: '#fff' }}
+        ></Lottie>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-[1340px] mx-auto px-2 mt-10">

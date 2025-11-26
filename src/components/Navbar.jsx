@@ -6,7 +6,7 @@ import { signOut } from 'next-auth/react';
 import { CartContext } from '@/Context/CartProvider';
 import { Search } from 'lucide-react';
 import { useForm } from 'react-hook-form';
-import { redirect } from 'next/navigation';
+import { redirect, usePathname } from 'next/navigation';
 import useAxios from '@/Hook/useAxios';
 import { SearchContext } from '@/Context/SearchProvider';
 
@@ -16,20 +16,49 @@ export default function Navbar() {
   const { searchText, setSearchText } = use(SearchContext);
   const axiosInstance = useAxios();
   const { register, handleSubmit } = useForm();
+  const pathName = usePathname();
 
   const navLinks = (
     <>
       <li>
-        <Link href="/">Home</Link>
+        <Link
+          className={`${
+            pathName === '/' && 'bg-purple-600 text-white'
+          } rounded-full`}
+          href="/"
+        >
+          Home
+        </Link>
       </li>
       <li>
-        <Link href="/products">Shop</Link>
+        <Link
+          className={`${
+            pathName === '/products' && 'bg-purple-600 text-white'
+          } rounded-full`}
+          href="/products"
+        >
+          Shop
+        </Link>
       </li>
       <li>
-        <Link href="/about-us">About Us</Link>
+        <Link
+          className={`${
+            pathName === '/about-us' && 'bg-purple-600 text-white'
+          } rounded-full`}
+          href="/about-us"
+        >
+          About Us
+        </Link>
       </li>
       <li>
-        <Link href="/contact-us">Contact Us</Link>
+        <Link
+          className={`${
+            pathName === '/contact-us' && 'bg-purple-600 text-white'
+          } rounded-full`}
+          href="/contact-us"
+        >
+          Contact Us
+        </Link>
       </li>
     </>
   );
@@ -74,7 +103,7 @@ export default function Navbar() {
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{navLinks}</ul>
+          <ul className="menu menu-horizontal px-1 gap-2">{navLinks}</ul>
         </div>
         <div className="navbar-end">
           {session?.user ? (

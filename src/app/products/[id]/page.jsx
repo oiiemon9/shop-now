@@ -9,6 +9,8 @@ import Tab from './Tab';
 import { useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
 import { CartContext } from '@/Context/CartProvider';
+import Lottie from 'lottie-react';
+import { motion } from 'framer-motion';
 
 export default function page({ params }) {
   const { id } = React.use(params);
@@ -61,6 +63,28 @@ export default function page({ params }) {
     }
   };
 
+  if (loading) {
+    return (
+      <div className="flex justify-center ">
+        <Lottie
+          animationData={require('../../../../public/LoadingAnimationBlue.json')}
+          loop={true}
+          style={{ width: '150px', height: '150px', color: '#fff' }}
+        ></Lottie>
+      </div>
+    );
+  }
+
+  const animationContainer = {
+    initial: {},
+    hover: {},
+  };
+
+  const imageAnimation = {
+    initial: { scale: 1 },
+    hover: { scale: 1.1 },
+  };
+
   return (
     <div className="max-w-[1340px] mx-auto px-2 mt-10">
       {product && (
@@ -79,20 +103,32 @@ export default function page({ params }) {
           <div className="mt-6">
             <div className="grid grid-cols-1 lg:grid-cols-2   items-center gap-18">
               <div className="flex flex-col-reverse sm:flex-row gap-5">
-                <button className="flex max-w-24 w-full h-24 border border-gray-300 p-2 bg-gray-100 cursor-pointer">
-                  <img
+                <motion.button
+                  variants={animationContainer}
+                  initial="initial"
+                  whileHover="hover"
+                  className="flex max-w-24 w-full h-24 border border-gray-300 p-2 bg-gray-100 cursor-pointer overflow-hidden"
+                >
+                  <motion.img
+                    variants={imageAnimation}
                     className="h-full w-full object-contain"
                     src={product?.image}
                     alt=""
                   />
-                </button>
-                <div className=" aspect-[1/1] bg-gray-100">
-                  <img
+                </motion.button>
+                <motion.div
+                  variants={animationContainer}
+                  initial
+                  whileHover="hover"
+                  className=" aspect-[1/1] bg-gray-100 overflow-hidden"
+                >
+                  <motion.img
+                    variants={imageAnimation}
                     className="h-full w-full object-contain p-4"
                     src={product?.image}
                     alt=""
                   />
-                </div>
+                </motion.div>
               </div>
               <div className="space-y-6">
                 <h2 className="text-2xl font-semibold">{product.title}</h2>
@@ -113,7 +149,6 @@ export default function page({ params }) {
                 </div>
                 <h2 className="text-2xl font-bold">${product.price}</h2>
                 <p className="text-gray-600 flex gap-1 text-sm">
-                  <Clipboard size={20} />
                   {product.sortDescription}
                 </p>
                 <button
