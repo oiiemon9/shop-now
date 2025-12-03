@@ -74,4 +74,4 @@ npm run dev
 
 ## 🔗 Links
 
-[![portfolio](https://img.shields.io/badge/ShopNow-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://shop-now-hqwy.vercel.app)
+[![portfolio](https://img.shields.io/badge/ShopNow-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://shop-now-jet.vercel.app/)
